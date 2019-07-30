@@ -1,0 +1,206 @@
+html,body{
+	padding:0;
+	margin:0;
+	overflow:hidden;
+	background-color:#1467e7;
+}
+.con{
+	padding:0 auto;
+	margin:0 auto;
+	overflow:hidden;
+}
+.con1{
+	padding:0 auto;
+	margin:0 auto;
+	overflow:hidden;
+	background-repeat:no-repeat;
+	background-image:url("../images/LoginBG.png");
+	background-position:center;
+}
+.head{
+	float:left;
+	height:150px;
+}
+.logo{
+	float:left;
+	width:577px;
+	height:127px;
+	background-image:url("../images/logo.png");
+	margin-top:23px;
+	margin-left:50px;
+}
+.center{
+	float:left;
+}
+.showImg{
+	float:left;
+	width:618px;
+	height:450px;
+	background:url("../images/LoginImg.png") no-repeat;
+	background-size:100% 100%;
+}
+.FormDiv{
+	float:left;
+	width:380px;
+	height:450px;
+	margin-left:30px;
+}
+.Form_LT{
+	float:left;
+	width:17px;
+	height:16px;
+	background-image:url("../images/LoginForm_LT.png");
+}
+.Form_T{
+	float:left;
+	width:346px;
+	height:16px;
+	background-image:url("../images/LoginForm_T.png");
+}
+.Form_RT{
+	float:left;
+	width:17px;
+	height:16px;
+	background-image:url("../images/LoginForm_RT.png");
+}
+.Form_L{
+	float:left;
+	width:17px;
+	height:418px;
+	background-image:url("../images/LoginForm_L.png");
+}
+.Form_C{
+	float:left;
+	width:346px;
+	height:418px;
+	background-color:#FFF;
+}
+.Form_R{
+	float:left;
+	width:17px;
+	height:418px;
+	background-image:url("../images/LoginForm_R.png");
+}
+.Form_LB{
+	float:left;
+	width:17px;
+	height:16px;
+	background-image:url("../images/LoginForm_LB.png");
+}
+.Form_B{
+	float:left;
+	width:346px;
+	height:16px;
+	background-image:url("../images/LoginForm_B.png");
+}
+.Form_RB{
+	float:left;
+	width:17px;
+	height:16px;
+	background-image:url("../images/LoginForm_RB.png");
+}
+.Form_head{
+	float:left;
+	width:294px;
+	height:50px;
+	border-bottom:1px solid #898989;
+	margin-left:20px;
+	margin-top:40px;
+	font-size:28px;
+	color:#1467e7;
+	padding-left:15px;
+}
+.Form_user{
+	float:left;
+	width:306px;
+	height:50px;
+	border:2px solid #e9eaeb;
+	margin-left:20px;
+	margin-top:20px;
+	border-radius:2px;
+}
+.user_img{
+	float:left;
+	width:50px;
+	height:50px;
+	background-color:#e9eaeb;
+}
+.user_inp{
+	float:left;
+	width:256px;
+	height:50px;
+}
+.Form_pwd{
+	float:left;
+	width:306px;
+	height:50px;
+	border:2px solid #e9eaeb;
+	margin-left:20px;
+	margin-top:20px;
+	border-radius:2px;
+}
+.pwd_img{
+	float:left;
+	width:50px;
+	height:50px;
+	background-color:#e9eaeb;
+}
+.pwd_inp{
+	float:left;
+	width:256px;
+	height:50px;
+}
+.Form_word{
+	float:left;
+	width:306px;
+	height:50px;
+	margin-left:20px;
+	margin-top:20px;
+}
+.word_left{
+	float:left;
+	width:156px;
+	height:50px;
+	border:2px solid #e9eaeb;
+	border-radius:2px;
+}
+.word_img{
+	float:left;
+	width:50px;
+	height:50px;
+	background-color:#e9eaeb;
+}
+.word_inp{
+	float:left;
+	width:106px;
+	height:50px;
+}
+.word_right{
+	float:left;
+	width:130px;
+	height:50px;
+	border:2px solid #e9eaeb;
+	border-radius:2px;
+	margin-left:12px;
+	font-size:32px;
+}
+.Form_btn{
+	float:left;
+	width:306px;
+	height:50px;
+	margin-left:20px;
+	margin-top:20px;
+}
+.Btn{
+	border:0px;
+	color:#FFFFFF;
+	background-color:#1467e7;
+	width:300px;
+	height:45px;
+	margin-left:3px;
+	font-size:25px;
+}
+.foot{
+	float:left;
+	height:100px;
+}
