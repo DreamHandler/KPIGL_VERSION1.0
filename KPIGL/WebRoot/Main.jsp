@@ -14,18 +14,17 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 	<head>
 		<title>测试UI框架3</title>
 		<script type="text/javascript" src="SysDefUtil/Origin.js"></script>
-		<link rel="stylesheet" href="/LyUI/Origin/Widget/bootstrap/font-awesome/4.5.0/css/font-awesome.css" />
-		<!-- text fonts -->
-		<link rel="stylesheet" href="/LyUI/Origin/Widget/bootstrap/css/fonts.googleapis.com.css" />
-		<link rel="stylesheet" href="/LyUI/Origin/Widget/bootstrap/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
-		<!-- 背景切换样式 -->
-		<link rel="stylesheet" href="/LyUI/Origin/Widget/bootstrap/css/ace-skins.css" />
-		<link rel="stylesheet" href="/LyUI/Origin/Widget/bootstrap/css/ace-rtl.css" />
 		
-		
-		<script src="/LyUI/Origin/Widget/bootstrap/js/ace-extra.js"></script>
-		<script src="main/JavaScript/Main.js"></script>
 		<script type="text/javascript">
+			InitCompriseCss(BassModuleUrlB+"css/bootstrap.css");
+			InitCompriseCss(BassModuleUrlB+"font-awesome/4.5.0/css/font-awesome.css");
+			InitCompriseCss(BassModuleUrlB+"css/fonts.googleapis.com.css");
+			InitCompriseCss(BassModuleUrlB+"css/ace.css");
+			InitCompriseCss(BassModuleUrlB+"css/ace-skins.css");
+			InitCompriseCss(BassModuleUrlB+"css/ace-rtl.css");
+			InitComprise(BassModuleUrlB+"js/ace-extra.js");
+			InitComprise("source/js/Main.js");
+			
 			function changeFrameHeight(obj){//自动调整iframe页面尺寸
 				var ifm = document.getElementById(obj.id);
 				var mainmenu = document.getElementById("mainmenu");
@@ -106,7 +105,7 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 </head>
 <body class="no-skin" onload="main.InitLoad();">
 	<!-- 页面头部  -->
-	<div id="navbar" class="navbar navbar-default ace-save-state" style="height:95px;">
+	<div id="navbar" class="navbar navbar-default ace-save-state" style="height:95px;background:url('source/images/navbar.png') ">
 		<div class="navbar-container ace-save-state" id="navbar-container" style="height:100%;">
 			<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
 				<span class="sr-only">Toggle sidebar</span>
@@ -115,12 +114,11 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 				<span class="icon-bar"></span>
 			</button>
 				
-			<div class="navbar-header pull-left" style="padding-top:10px;">
-				<a href="#" class="navbar-brand" style="font-size:55px;padding-right:0px;padding-left:0px;">
+			<div class="navbar-header pull-left" style="padding-top:0px;padding-left:30px;">
+				<a href="#" class="navbar-brand" style="padding:0px;">
 					<strong>
-						<!-- <img src='resource/default/images/logo.png' style='height:25px;padding-bottom: 5px'> -->
-						<i class="fa fa-leaf"></i>
-						bootstrap ui 后台3
+						<i class="fa fa-leaf" style="font-size:75px;margin-top:10px;margin-right:10px;"></i>
+						<img src='source/images/KPI_NAME.png' style='height:75px;margin-top:-40px;'></img> 
 					</strong>
 				</a>
 			</div>
@@ -131,7 +129,7 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 						<ul class="nav ace-nav">
 							<li class="light-blue dropdown-modal">
 								<a id="li_role" data-toggle="dropdown" href="#" class="dropdown-toggle">
-									<img class="nav-user-photo" src="/LyUI/Origin/Widget/bootstrap/images/avatars/user.jpg" alt="Jason's Photo" />
+									<img class="nav-user-photo" src="/LyUI/Origin/bootstrap/images/avatars/user.jpg" alt="Jason's Photo" />
 									<span class="user-info">
 										<%
 											if(apr == null){
@@ -244,12 +242,12 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 			try{ace.settings.loadState('main-container')}catch(e){}
 		</script>
 
-		<div id="sidebar" class="sidebar responsive ace-save-state">
+		<div id="sidebar" class="sidebar responsive ace-save-state" style="background-color:#1467e7">
 			<script type="text/javascript">
 				try{ace.settings.loadState('sidebar')}catch(e){}
 			</script>
 
-			<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+			<div class="sidebar-shortcuts" id="sidebar-shortcuts" style="background-color:#1467e7"> 
 				<!-- 导航头部 -->
 				<div class="sidebar-shortcuts-large" style='line-height:20px;margin-top:5px;width:100%;'>
 					 <span class="input-icon">
@@ -268,8 +266,8 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 			<div id="sub_menu"></div>		
 			
 			<!-- 菜单收缩、展开 -->
-			<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-				<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+			<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse" style="background-color:#1467e7">
+				<i id="sidebar-toggle-icon" style="background-color:#1467e7" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
 			</div>
 		</div>
 		<!-- 菜单栏完 -->
@@ -299,10 +297,10 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 	<!-- 菜单、iframe结束-->
 	<script type="text/javascript">
 		if('ontouchstart' in document.documentElement) 
-			document.write("<script src='/LyUI/Origin/Widget/bootstrap/js/jquery.mobile.custom.js'>"+"<"+"/script>");
+			document.write("<script src='/LyUI/Origin/bootstrap/js/jquery.mobile.custom.js'>"+"<"+"/script>");
 	</script>
-	<script src="/LyUI/Origin/Widget/bootstrap/js/bootstrap.js"></script>
-	<script src="/LyUI/Origin/Widget/bootstrap/js/ace-elements.js"></script>
-	<script src="/LyUI/Origin/Widget/bootstrap/js/ace.js"></script>
+	<script src="/LyUI/Origin/bootstrap/js/bootstrap.js"></script>
+	<script src="/LyUI/Origin/bootstrap/js/ace-elements.js"></script>
+	<script src="/LyUI/Origin/bootstrap/js/ace.js"></script>
 </body>
 </html>

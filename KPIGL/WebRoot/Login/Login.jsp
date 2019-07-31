@@ -65,5 +65,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<div class="foot"></div>
     	</div>
     </div>
+    <script type="text/javascript">
+    	$("#username").focus();
+    </script>
   </body>
 </html>
