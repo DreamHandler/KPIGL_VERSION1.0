@@ -35,7 +35,7 @@ public class Validata {
 		
 		Element rsElement = document.addElement("xlm");
 		Element data = rsElement.addElement("DATA");
-		SysNo = SysNo+"|";
+//		SysNo = SysNo+"|";
 		
 		/*//服务的具体类，继承了service类
 		IserviceImplService  service=new IserviceImplService();

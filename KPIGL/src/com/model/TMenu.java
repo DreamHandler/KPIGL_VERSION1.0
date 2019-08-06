@@ -22,13 +22,13 @@ public class TMenu {
 		if(SysNo==null||VCDBM==null||"".equals(VCDBM)||"".equals(SysNo)){
 			return null;
 		}
-		String[] VCDBMS = VCDBM.split("\\|");
-		for(String VCDB : VCDBMS){
-			String[] VCD = VCDB.split("\\=");
-			String NO = VCD[0];
-			String CD = VCD[1];
-			if(SysNo.equals(NO)){
-				String[] CDS = CD.split("\\+");
+//		String[] VCDBMS = VCDBM.split("\\|");
+//		for(String VCDB : VCDBMS){
+//			String[] VCD = VCDB.split("\\=");
+//			String NO = VCD[0];
+//			String CD = VCD[1];
+//			if(SysNo.equals(NO)){
+				String[] CDS = VCDBM.split("\\|");
 				List<Map<String,String>> list = new ArrayList<Map<String,String>>();
 				for(String c : CDS){
 					for(Map<String,String> menu : menuDate){
@@ -39,14 +39,15 @@ public class TMenu {
 						}
 					}
 				}
-				if(list.size()>0){
-					return list;
-				}else{
-					return list;
-				}
-			}
-		}
-		return null;
+				return list;
+//				if(list.size()>0){
+//					return list;
+//				}else{
+//					return list;
+//				}
+//			}
+//		}
+//		return null;
 		
 	}
 	public static boolean IsMeneNotNull(){
