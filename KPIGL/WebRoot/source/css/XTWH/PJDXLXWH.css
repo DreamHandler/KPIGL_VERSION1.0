@@ -1,0 +1,61 @@
+html,body{
+	padding:0;
+	margin:0;
+	overflow:hidden;
+	background-color:#FFFFFF;
+	font-size:16px;
+}
+.con{
+	padding:0 auto;
+	margin:0 auto;
+	overflow:hidden;
+}
+.TopGrid{
+	float:left;
+	margin:10px;
+}
+.GridDiv{
+	border:1px solid #11bbdf;
+	float:left;
+}
+.SetCenter{
+	float:left;
+	margin:10px 10px 10px 0px;
+}
+.formDiv{
+	float:left;
+	margin-top:15px;
+}
+.formLeft{
+	float:left;
+	width:120px;
+	text-align:right;
+}
+.formRight{
+	float:left;
+}
+.bitradio{
+	float:left;
+	margin-left:15px;
+	cursor:pointer;
+}
+.BtnFoot{
+	float:left;
+	position: fixed;
+	bottom: 0;
+}
+.BomToolbar{
+	float:right;
+	margin-right:30px;
+}
+.Tbar{
+	float:right;
+	margin-right:15px;
+}
+.Btn{
+	width:80px;
+	height:30px;
+	border:0px;
+	color:#0000a0;
+	background-image:url('../../images/button.png');
+}

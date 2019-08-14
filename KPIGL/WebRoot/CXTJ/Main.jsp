@@ -13,7 +13,7 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 <html>
 	<head>
 		<title>测试UI框架3</title>
-		<script type="text/javascript" src="SysDefUtil/Origin.js"></script>
+		<script type="text/javascript" src="../SysDefUtil/Origin.js"></script>
 		
 		<script type="text/javascript">
 			InitCompriseCss(BassModuleUrlB+"css/bootstrap.css");
@@ -23,7 +23,7 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 			InitCompriseCss(BassModuleUrlB+"css/ace-skins.css");
 			InitCompriseCss(BassModuleUrlB+"css/ace-rtl.css");
 			InitComprise(BassModuleUrlB+"js/ace-extra.js");
-			InitComprise("source/js/Main.js");
+			InitComprise("../source/js/Main.js");
 			
 			function changeFrameHeight(obj){//自动调整iframe页面尺寸
 				var ifm = document.getElementById(obj.id);
@@ -137,7 +137,7 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 											}
 										%>
 										<small><%=apr.getVascname()%></small>
-										<%=apr.getVname()%>
+										<%=apr.getAperator("VNAME")%>
 									</span>
 									<i class="ace-icon fa fa-caret-down"></i>
 								</a>
@@ -187,9 +187,9 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 							   <div class="pull-left">
 									<select id="skin-colorpicker" class="hide">
 										<option data-skin="no-skin" value="#438EB9">#438EB9</option>
-										<option data-skin="skin-1" value="#222A2D" selected>#222A2D</option>
+										<option data-skin="skin-1" value="#222A2D">#222A2D</option>
 										<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-										<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+										<option data-skin="skin-3" value="#D0D0D0" selected>#D0D0D0</option>
 									</select>
 								</div>
 								<span>&nbsp; 选择皮肤</span>
@@ -242,12 +242,12 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 			try{ace.settings.loadState('main-container')}catch(e){}
 		</script>
 
-		<div id="sidebar" class="sidebar responsive ace-save-state" >
+		<div id="sidebar" class="sidebar responsive ace-save-state">
 			<script type="text/javascript">
 				try{ace.settings.loadState('sidebar')}catch(e){}
 			</script>
 
-			<div class="sidebar-shortcuts" id="sidebar-shortcuts" > 
+			<div class="sidebar-shortcuts" id="sidebar-shortcuts"> 
 				<!-- 导航头部 -->
 				<div class="sidebar-shortcuts-large" style='line-height:20px;margin-top:5px;width:100%;'>
 					 <span class="input-icon">
@@ -266,8 +266,8 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 			<div id="sub_menu"></div>		
 			
 			<!-- 菜单收缩、展开 -->
-			<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse" >
-				<i id="sidebar-toggle-icon"  class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+			<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+				<i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
 			</div>
 		</div>
 		<!-- 菜单栏完 -->
@@ -284,7 +284,7 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 					</ul>
 					<div class="tab-content" id="menu_iframe" style="padding:0px;">
 						<div id="li_menu02-tab" class="tab-pane active" style="padding:0px;">
-							<iframe id="iframe_menu02" src="XTWH/PJDXLXWH.jsp" width="100%"
+							<iframe id="iframe_menu02" src="XTWH/BZXSWH.jsp" width="100%"
 							allowtransparency="true" onload="changeFrameHeight(this)" 
 							 scrolling="auto" frameborder="0" marginheight="-10" >
 							</iframe>

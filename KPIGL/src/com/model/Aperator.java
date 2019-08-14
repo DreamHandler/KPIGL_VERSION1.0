@@ -50,7 +50,7 @@ public class Aperator extends Menu{
 		return this.getAperator("VUSER");
 	}
 	/**
-	 * 所属组
+	 * 操作员名称
 	 * @return
 	 */
 	public String  getVname(){
