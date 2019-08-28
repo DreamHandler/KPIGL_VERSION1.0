@@ -284,7 +284,7 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 					</ul>
 					<div class="tab-content" id="menu_iframe" style="padding:0px;">
 						<div id="li_menu02-tab" class="tab-pane active" style="padding:0px;">
-							<iframe id="iframe_menu02" src="XTWH/PJDXLXWH.jsp" width="100%"
+							<iframe id="iframe_menu02" src="XTWH/YLZBZDWH.jsp" width="100%"
 							allowtransparency="true" onload="changeFrameHeight(this)" 
 							 scrolling="auto" frameborder="0" marginheight="-10" >
 							</iframe>

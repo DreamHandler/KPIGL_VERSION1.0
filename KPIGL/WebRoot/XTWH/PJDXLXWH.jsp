@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="SetCenter">
   			<div class="formDiv">
   				<div class="formLeft">编码：</div>
-  				<div class="formRight"><input type="text" id="VNum" /></div>
+  				<div class="formRight"><input type="text" id="VNum" disabled/></div>
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">名称：</div>
@@ -36,7 +36,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">主管单位：</div>
-  				<div class="formRight"><input type="text" id="VGoverningBody" /></div>
+  				<div class="formRight">
+  					<select id="VGoverningBody" >
+  						<option value="1">医院</option>
+  						<option value="2">机构</option>
+  					</select>
+  				</div>
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">EP名称：</div>
@@ -64,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">是否可用：</div>
-  				<div class="formRight">
+  				<div class="formRight" id="Benable">
   					<div class="bitradio">
 	  					<input id="Benable1" name="Benable" type="radio" value="1" checked="checked" />
 	  					<label for="Benable1" class="radio-label">是</label>
@@ -77,9 +82,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">默认加载：</div>
-  				<div class="formRight">
+  				<div class="formRight" id="BDefaultLoad">
   					<div class="bitradio">
-	  					<input id="BDefaultLoad1" name="BDefaultLoad" type="radio" value="1" checked="checked" />
+	  					<input id="BDefaultLoad1" name="BDefaultLoad" type="radio" value="1"  checked="checked"/>
 	  					<label for="BDefaultLoad1" class="radio-label">是</label>
   					</div>
   					<div class="bitradio">

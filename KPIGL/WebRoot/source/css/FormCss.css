@@ -6,7 +6,7 @@ input[type="radio"]+.radio-label:before{
 	content:'';
 	background:#f4f4f4;
 	border-radius:100%;
-	border:1px solid #b4b4b4;
+	border:1px solid #000000;
 	display:inline-block;
 	width:1.2em;
 	height:1.2em;
@@ -80,6 +80,9 @@ input[type="text"]{
 	color:#0255df;
 	font-size:16px;
 }
+input[type="text"]:disabled{
+	color:#646464;
+}
 textarea{
 	width:100%;
 	height:50px;
@@ -87,14 +90,16 @@ textarea{
 	border:1px solid #000000;
 	color:#0255df;
 	font-size:16px;
-	overflow:hidden
+	overflow:hidden;
+}
+textarea:disabled{
+	color:#646464;
 }
 select{
 	display:block;
 	width:100%;
 	height:100%;
 	box-sizing:border-box;
-	background:none;
 	border:1px solid #222;
 	outline:none;
 	-webkit-appearance:none;
@@ -102,11 +107,12 @@ select{
 	appearance:none;
 	padding:0 5px;
 	line-height:inherit;
-	color:inherit;
 	cursor:default;
 	font-size:14px;
 	position:relative;
 	z-index:3;
+	border-radius:5px;
+	color:#0255df;
 }
 select::-ms-expand{
 	display:none;
@@ -120,6 +126,10 @@ select option:hover{
 select option:checked{
 	background:#535353;
 	color:#fff;
+}
+select:disabled{
+	background:#f0f0f0;
+	color:#0255df;
 }
 .selectStyle{
 	display:block;
