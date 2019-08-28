@@ -1,0 +1,98 @@
+html,body{
+	padding:0;
+	margin:0;
+	overflow:hidden;
+	background-color:#FFFFFF;
+	font-size:16px;
+}
+.con{
+	padding:0 auto;
+	margin:0 auto;
+	overflow:hidden;
+}
+.checkdiv{
+	float:left;
+	margin-left:20px;
+	margin-top:12px;
+	cursor:pointer;
+	font-weight:bold;
+}
+.bitradio{
+	float:left;
+	margin-left:15px;
+	cursor:pointer;
+}
+.filradio{
+	float:left;
+	margin-left:15px;
+	margin-top:12px;
+	cursor:pointer;
+}
+.filradio{
+	float:left;
+	margin-left:15px;
+	margin-top:12px;
+	cursor:pointer;
+}
+.TopGrid{
+	float:left;
+}
+.fillter{
+	float:left;
+	margin-left:15px;
+	margin-top:10px;
+	border:1px solid #c5c5c5;
+	background-color:#eef4fd;
+	height:50px;
+	border-radius:5px;
+}
+.textdiv{
+	float:left;
+	matgin-left:15px;
+	margin-top:10px;
+}
+.QryBtn{
+	float:right;
+	margin-top:10px;
+	margin-right:20px;
+}
+.GridDiv{
+	border:1px solid #11bbdf;
+	margin-top:10px;
+	margin-left:15px;
+	float:left;
+}
+.SetCenter{
+	float:left;
+}
+.formDiv{
+	float:left;
+	margin-top:10px;
+}
+.formLeft{
+	float:left;
+	width:170px;
+	text-align:right;
+}
+.formRight{
+	float:left;
+}
+.BtnFoot{
+	float:left;
+}
+.BomToolbar{
+	float:right;
+	margin-right:30px;
+}
+.Tbar{
+	float:right;
+	margin-right:15px;
+}
+.Btn{
+	cursor:pointer;
+	width:80px;
+	height:30px;
+	border:0px;
+	color:#0000a0;
+	background-image:url('../../images/button.png');
+}
