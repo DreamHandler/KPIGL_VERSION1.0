@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
-import SOA.Util.Model.Xtcs;
-import SOA.Util.Model.xtcsDefList;
+import SOA.Util.Model.XtParam;
 
 import com.model.Aperator;
 import com.util.BaseServire;
@@ -79,8 +78,7 @@ public class SFXMWH extends Busy{
 		String SQL="";
 		try {
 			if("1".equals(flag)){//新增
-//				xtcsDefList.GetXtcsByVno("");
-				String VNum = "";
+				String VNum = XtParam.GetSysParameter("JXKH000001", 1);
 				list.add(VNum);
 				SQL = "INSERT INTO LYJXKH..TBSFXM (VName,VPYM,IItemType,IProjectType,Benable,NOutDoc,NClinician"
 						+ ",NAnesthetist,NInspection,NWardNurses,NWardRoomNurse,NOutRoomNurse,NExcimerNurse"

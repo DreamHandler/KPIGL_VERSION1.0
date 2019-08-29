@@ -12,7 +12,7 @@ Aperator apr = (Aperator)Session.getAttribute("opr");
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>测试UI框架3</title>
+		<title>欢迎使用绩效考核系统</title>
 		<script type="text/javascript" src="SysDefUtil/Origin.js"></script>
 		
 		<script type="text/javascript">

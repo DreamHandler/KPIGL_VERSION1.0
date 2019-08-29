@@ -40,7 +40,7 @@ PJDXLXWH.prototype = Object.extend(new LBase(), {
 		dxlxwh.grid = $("#GridDiv").LyGrid({ 
             columns: [
             { display: '编码', name: 'VNum', width: 79, type: 'int' },
-            { display: '主管单位', name: 'VGoverningBody', width: 199 },
+            { display: '主管单位', name: 'VGoverningBody', width: 199 ,render : dxlxwh.toGoverningBody},
             { display: '名称', name: 'VName', width: 199 },
             { display: '是否可用', name: 'Benable', width: 69 ,render : dxlxwh.toBenable}
             ], width: $(".TopGrid").width(), pkName: 'VNum'
@@ -112,6 +112,9 @@ PJDXLXWH.prototype = Object.extend(new LBase(), {
 	/**
 	 * 可用性转化,无效
 	 */
+	toGoverningBody : function(value,col){
+		return value.VGoverningBody == "1"? "医院":"机构";
+	},
 	toBenable : function(value,col){
 		return value.Benable == "1"? "可用":"不可用";
 		

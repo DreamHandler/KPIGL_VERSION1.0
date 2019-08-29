@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <title>病种系数维护</title>
+    <title>评价对象类型维护</title>
 	<script type="text/javascript" src="SysDefUtil/Origin.js"></script>
 	<script type="text/javascript">
 		InitCompriseCss("source/css/FormCss.css");
