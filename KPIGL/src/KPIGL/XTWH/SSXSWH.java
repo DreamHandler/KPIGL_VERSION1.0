@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import org.dom4j.Document;
 import org.dom4j.Element;
 
+import SOA.Util.Model.XtParam;
 import SOA.Util.Model.xtcsDefList;
 
 import com.model.Aperator;
 import com.util.BaseServire;
 import com.util.Busy;
 
-public class XLBZWH extends Busy{
+public class SSXSWH extends Busy{
 	/**
 	 * 查询数据
 	 * @param inEle
@@ -28,7 +29,7 @@ public class XLBZWH extends Busy{
 		if(Aele.attributeValue("BENABLE")!=null){
 			Where += " and BENABLE = "+Aele.attributeValue("BENABLE");
 		}
-		String SQL="select * from LYJXKH..TBXLBZ with(nolock) where 1=1" + Where;
+		String SQL="select * from LYJXKH..TBSSXS with(nolock) where 1=1" + Where;
 		try {
 			doc = this.ServireSQL(BaseServire.SysQuer,SQL,null,inopr);
 		} catch (Exception e) {
@@ -46,12 +47,12 @@ public class XLBZWH extends Busy{
 	public String DataImport(Document inEle, Aperator inopr) throws Exception{
 		Document doc = null;
 		
-		String dataLY = xtcsDefList.GetSysXtcs("000003", ""); //科室视图
+		String dataLY = xtcsDefList.GetSysXtcs("000005", ""); //手术视图
 		//保存已分配信息
-		String SQL=" MERGE LYJXKH..TBXLBZ AS MBTABLE USING ("+dataLY+") AS YBTABLE (VNum,VName,VPYM)"
+		String SQL=" MERGE LYJXKH..TBSSXS AS MBTABLE USING ("+dataLY+") AS YBTABLE (VNum,VName,VCODE10,VPYM)"
 				+ " ON (MBTABLE.VNum = YBTABLE.VNum) WHEN MATCHED THEN "
-				+ " UPDATE SET MBTABLE.VName=YBTABLE.VName,MBTABLE.VPYM=YBTABLE.VPYM "
-				+ " WHEN NOT MATCHED THEN INSERT (VNum,VName,VPYM) VALUES (VNum,VName,VPYM);";
+				+ " UPDATE SET MBTABLE.VName=YBTABLE.VName,MBTABLE.VPYM=YBTABLE.VPYM,MBTABLE.VCODE10=YBTABLE.VCODE10 "
+				+ " WHEN NOT MATCHED THEN INSERT (VNum,VName,VPYM,VCODE10) VALUES (VNum,VName,VPYM,VCODE10);";
 		try {
 			doc = this.ServireSQL(BaseServire.SysModify,SQL,null,inopr);
 		} catch (Exception e) {
@@ -69,36 +70,28 @@ public class XLBZWH extends Busy{
 		Element Aele = inEle.getRootElement().element("ASK");
 		String flag = Aele.attributeValue("flag");
 //		String VName = Aele.attributeValue("VName");
-		String IProjectType = Aele.attributeValue("IProjectType");
-		String NNumber = Aele.attributeValue("NNumber");
-		String NDifficulty = Aele.attributeValue("NDifficulty");
-		String NRiskLevel = Aele.attributeValue("NRiskLevel");
 		String Benable = Aele.attributeValue("Benable");
+		String NDistribution = Aele.attributeValue("NDistribution");
 		String VRemarks = Aele.attributeValue("VRemarks");
 		ArrayList<String> list = new ArrayList<String>();
 //		list.add(VName);
 //		list.add(VName);
-		list.add(IProjectType);
-		list.add("".equals(NNumber)?"0":NNumber);
-		list.add("".equals(NDifficulty)?"0":NDifficulty);
-		list.add("".equals(NRiskLevel)?"0":NRiskLevel);
 		list.add(Benable);
+		list.add("".equals(NDistribution)?"0.00":NDistribution);
 		list.add(VRemarks);
 		
 		Document doc = null;
 		String SQL="";
 		try {
 			if("1".equals(flag)){//新增
-//				xtcsDefList.GetXtcsByVno("");
-				String VNum = Aele.attributeValue("VNum");
+				String VNum = XtParam.GetSysParameter("JXKH000001", 1);
 				list.add(VNum);
-				SQL = "INSERT INTO LYJXKH..TBXLBZ (VName,VPYM,IProjectType,NNumber,NDifficulty,NRiskLevel"
-						+ ",Benable,VRemarks,VNum)VALUES(?,BASEMENT.DBO.GetPY(?),?,?,?,?,?,?,?)";
+				SQL = "INSERT INTO LYJXKH..TBSSXS (VName,VPYM,VCODE10,Benable,NDistribution,VRemarks)"
+						+ "VALUES(?,BASEMENT.DBO.GetPY(?),?,?,?,?)";
 			}else if("2".equals(flag)){
 				String VNum = Aele.attributeValue("VNum");
 				list.add(VNum);
-				SQL = "UPDATE LYJXKH..TBXLBZ SET IProjectType=?,NNumber=?,NDifficulty=?,NRiskLevel=?"
-						+ ",Benable=?,VRemarks=? WHERE VNum=?";
+				SQL = "UPDATE LYJXKH..TBSSXS SET Benable=?,NDistribution=?,VRemarks=? WHERE VNum=?";
 			}
 			doc = this.ServireSQL(BaseServire.SysModify,SQL,list,inopr);
 		} catch (Exception e) {

@@ -34,14 +34,15 @@ YLZBZDWH.prototype = Object.extend(new LBase(), {
 		ylzbzd.grid = $("#GridDiv").LyGrid({ 
             columns: [
             { display: '科室编码', name: 'VNum', width: 80, type: 'int' },
-            { display: '科室名称', name: 'VName', width: 160 },
-            { display: '拼音码', name: 'VPYM', width: 60 },
+            { display: '科室名称', name: 'VName', width: 180 },
+            { display: '拼音码', name: 'VPYM', width: 180 },
             { display: '药占比', name: 'NMedicine', width: 150 },
-            { display: '基药比', name: 'MDifficulty', width: 150 },
-            { display: '材料占比', name: 'MRiskLevel', width: 150 },
+            { display: '基药比', name: 'NBasicMedicine', width: 150 },
+            { display: '材料占比', name: 'NMaterial', width: 150 },
             { display: '可用性', name: 'Benable', width: 80 ,render : ylzbzd.toBenable}
             ], width: $(".GridDiv").width(), pkName: 'VNum', 
-            pageSizeOptions: [5, 10, 15, 20], 
+            pageSize:15,
+            pageSizeOptions: [10, 15, 20, 25], 
             height: $(".GridDiv").height()-1,
             //grid 点击事件
             onSelectRow : ylzbzd.grid_onSelectRow,
@@ -148,6 +149,28 @@ YLZBZDWH.prototype = Object.extend(new LBase(), {
 	/**
 	 * 按钮组
 	 */
+	import : function(){
+		$.LyDialog.confirm('导入后数据会全部更新，是否确定导入？', function (bool){
+			if(bool){
+				ylzbzd.ajaxCall({},"KPIGL.XTWH.YLZBZDWH","DataImport",ylzbzd.importHander,false);
+			}
+		});
+	},
+	importHander : function(ajax){
+		if (xmlObject.readyState == 4 && xmlObject.status == 200) {
+			var response = xmlObject;
+			var node = response.responseXML.documentElement;
+			if(node==null||node.xml===undefined){
+				node = ylzbzd.StrToXml(response.responseText);
+			}
+			if(node.selectSingleNode("RES/DAT").text>="1"){
+				alert("导入更新成功！");
+				ylzbzd.LoadData();
+			}else{
+				alert("导入更新失败！");
+			}
+		}
+	},
 	BtnAdd : function(){
 		ylzbzd.sta = 1;
 		ylzbzd.BtnChange(2);
@@ -198,22 +221,22 @@ YLZBZDWH.prototype = Object.extend(new LBase(), {
 	 * 按钮显隐控制
 	 */
 	BtnChange : function(type){
-		if(type == 1){//新增、修改可用，保存、放弃不可用
-			$("#add,#mod").each(function(i,n){
+		if(type == 1){//导入更新、新增、修改可用，保存、放弃不可用
+			$("#import,#add,#mod").each(function(i,n){
 				ylzbzd.BtnDisabled(false,n.id);
 		    });
 			$("#sav,#can").each(function(i,n){
 				ylzbzd.BtnDisabled(true,n.id);
 		    });
-		}else if(type == 2){//保存、放弃可用,新增、修改不可用
+		}else if(type == 2){//保存、放弃可用,导入更新、新增、修改不可用
 			$("#sav,#can").each(function(i,n){
 				ylzbzd.BtnDisabled(false,n.id);
 		    });
-			$("#add,#mod").each(function(i,n){
+			$("#import,#add,#mod").each(function(i,n){
 				ylzbzd.BtnDisabled(true,n.id);
 		    });
-		}if(type == 3){//新增可用，修改、保存、放弃不可用
-			$("#add").each(function(i,n){
+		}else if(type == 3){//导入更新、新增可用，修改、保存、放弃不可用
+			$("#import,#add").each(function(i,n){
 				ylzbzd.BtnDisabled(false,n.id);
 		    });
 			$("#mod,#sav,#can").each(function(i,n){
@@ -241,10 +264,10 @@ YLZBZDWH.prototype = Object.extend(new LBase(), {
 	 */
 	inputDis : function(inputFlag){
 		ylzbzd.conditionDis();
-		$("#VNum,#VName,#NMedicine,#NBasicMedicine,#NMaterial,#Benable,#VRemarks").each(function(i,n){
+		$("#NMedicine,#NBasicMedicine,#NMaterial,#Benable,#VRemarks").each(function(i,n){
 				$("#"+n.id).attr("disabled",inputFlag);
 		});
-		$("#VNum").focus();
+		$("#NMedicine").focus();
 		if(ylzbzd.sta == 1){
 			$("#NMedicine,#NBasicMedicine,#NMaterial").each(function(i,n){
 					$("#"+n.id).val("0.00");

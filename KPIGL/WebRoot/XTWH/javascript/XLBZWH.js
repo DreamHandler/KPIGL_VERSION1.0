@@ -34,16 +34,17 @@ XLBZWH.prototype = Object.extend(new LBase(), {
 	createGrid : function(){
 		xlbz.grid = $("#GridDiv").LyGrid({ 
             columns: [
-            { display: '科室编码', name: 'VNum', width: 80, type: 'int' },
-            { display: '科室名称', name: 'VName', width: 160 },
-            { display: '拼音码', name: 'VPYM', width: 60 },
+            { display: '科室编码', name: 'VNum', width: 80 },
+            { display: '科室名称', name: 'VName', width: 180 },
+            { display: '拼音码', name: 'VPYM', width: 180 },
             { display: '项目类型', name: 'IProjectType', width: 120 ,render : xlbz.toProjectType},
-            { display: '项目次数金额', name: 'MNumber', width: 150 ,render : xlbz.toMNumber},
-            { display: '项目难度金额', name: 'MDifficulty', width: 150 ,render : xlbz.toMDifficulty},
-            { display: '风险程度金额', name: 'MRiskLevel', width: 150 ,render : xlbz.toMRiskLevel},
+            { display: '项目次数金额', name: 'NNumber', width: 150 },
+            { display: '项目难度金额', name: 'NDifficulty', width: 150 },
+            { display: '风险程度金额', name: 'NRiskLevel', width: 150 },
             { display: '可用性', name: 'Benable', width: 80 ,render : xlbz.toBenable}
-            ], width: $(".GridDiv").width(), pkName: 'VNum', 
-            pageSizeOptions: [5, 10, 15, 20], 
+            ], width: $(".GridDiv").width(), pkName: 'VNum',
+            pageSize:15,
+            pageSizeOptions: [10, 15, 20, 25],  
             height: $(".GridDiv").height()-1,
             //grid 点击事件
             onSelectRow : xlbz.grid_onSelectRow,
@@ -56,18 +57,6 @@ XLBZWH.prototype = Object.extend(new LBase(), {
 	toProjectType : function(value,col){
 		return value.IProjectType == "0"? "不区分":value.IProjectType == "1"? "非手术类":"手术类";
 	},
-	toMNumber : function(value,col){
-		var val = value.MNumber;
-		return val.substring(0,val.length - 2);
-	},
-	toMDifficulty : function(value,col){
-		var val = value.MDifficulty;
-		return val.substring(0,val.length - 2);
-	},
-	toMRiskLevel : function(value,col){
-		var val = value.MRiskLevel;
-		return val.substring(0,val.length - 2);
-	},
 	toBenable : function(value,col){
 		return value.Benable == "1"? "可用":"不可用";
 	},
@@ -78,12 +67,9 @@ XLBZWH.prototype = Object.extend(new LBase(), {
 		xlbz.status = status;
 		xlbz.rowData = rowData;
 		xlbz.selectRowIndex = rowData["__index"];
-		$("#VNum,#VName,#IProjectType,#MNumber,#MDifficulty,#MRiskLevel,#Benable,#VRemarks").each(function(i,n){
+		$("#VNum,#VName,#IProjectType,#NNumber,#NDifficulty,#NRiskLevel,#Benable,#VRemarks").each(function(i,n){
 				if(n.id=="IProjectType" || n.id=="Benable"){
 					$("#"+n.id+rowData[n.id])[0].checked = true;
-				}else if(n.id=="MNumber" || n.id=="MDifficulty" || n.id=="MRiskLevel"){
-					var val = rowData[n.id];
-					$("#"+n.id).val(val.substring(0,val.length - 2));
 				}else{
 					$("#"+n.id).val(rowData[n.id]);
 				}
@@ -168,6 +154,28 @@ XLBZWH.prototype = Object.extend(new LBase(), {
 	/**
 	 * 按钮组
 	 */
+	import : function(){
+		$.LyDialog.confirm('导入后数据会全部更新，是否确定导入？', function (bool){
+			if(bool){
+				xlbz.ajaxCall({},"KPIGL.XTWH.XLBZWH","DataImport",xlbz.importHander,false);
+			}
+		});
+	},
+	importHander : function(ajax){
+		if (xmlObject.readyState == 4 && xmlObject.status == 200) {
+			var response = xmlObject;
+			var node = response.responseXML.documentElement;
+			if(node==null||node.xml===undefined){
+				node = xlbz.StrToXml(response.responseText);
+			}
+			if(node.selectSingleNode("RES/DAT").text>="1"){
+				alert("导入更新成功！");
+				xlbz.LoadData();
+			}else{
+				alert("导入更新失败！");
+			}
+		}
+	},
 	BtnAdd : function(){
 		xlbz.sta = 1;
 		xlbz.BtnChange(2);
@@ -182,7 +190,7 @@ XLBZWH.prototype = Object.extend(new LBase(), {
 	},
 	BtnSav : function(){
 		var QryJson = {"flag":xlbz.sta};
-		$("#VNum,#VName,#IProjectType,#MNumber,#MDifficulty,#MRiskLevel,#Benable,#VRemarks").each(function(i,n){
+		$("#VNum,#VName,#IProjectType,#NNumber,#NDifficulty,#NRiskLevel,#Benable,#VRemarks").each(function(i,n){
 				if(n.id=="IProjectType" || n.id=="Benable"){
 					var value = $('input:radio[name="'+n.id+'"]:checked').val();
 					QryJson[n.id] = value;
@@ -190,7 +198,7 @@ XLBZWH.prototype = Object.extend(new LBase(), {
 					QryJson[n.id] = $("#"+n.id).val();
 				}
 		});
-		this.ajaxCall(QryJson,"KPIGL.XTWH.XLBZWH","DataSave",xlbz.BtnSavHandle,false);
+		xlbz.ajaxCall(QryJson,"KPIGL.XTWH.XLBZWH","DataSave",xlbz.BtnSavHandle,false);
 	},
 	BtnSavHandle : function(ajax){
 		if (xmlObject.readyState == 4 && xmlObject.status == 200) {
@@ -221,22 +229,22 @@ XLBZWH.prototype = Object.extend(new LBase(), {
 	 * 按钮显隐控制
 	 */
 	BtnChange : function(type){
-		if(type == 1){//新增、修改可用，保存、放弃不可用
-			$("#add,#mod").each(function(i,n){
+		if(type == 1){//导入更新、新增、修改可用，保存、放弃不可用
+			$("#import,#add,#mod").each(function(i,n){
 				xlbz.BtnDisabled(false,n.id);
 		    });
 			$("#sav,#can").each(function(i,n){
 				xlbz.BtnDisabled(true,n.id);
 		    });
-		}else if(type == 2){//保存、放弃可用,新增、修改不可用
+		}else if(type == 2){//保存、放弃可用,导入更新、新增、修改不可用
 			$("#sav,#can").each(function(i,n){
 				xlbz.BtnDisabled(false,n.id);
 		    });
-			$("#add,#mod").each(function(i,n){
+			$("#import,#add,#mod").each(function(i,n){
 				xlbz.BtnDisabled(true,n.id);
 		    });
-		}if(type == 3){//新增可用，修改、保存、放弃不可用
-			$("#add").each(function(i,n){
+		}if(type == 3){//导入更新、新增可用，修改、保存、放弃不可用
+			$("#import,#add").each(function(i,n){
 				xlbz.BtnDisabled(false,n.id);
 		    });
 			$("#mod,#sav,#can").each(function(i,n){
@@ -263,13 +271,13 @@ XLBZWH.prototype = Object.extend(new LBase(), {
 	 * 输入框显隐控制
 	 */
 	inputDis : function(inputflag){
-		$("#VNum,#VName,#IProjectType,#MNumber,#MDifficulty,#MRiskLevel,#Benable,#VRemarks").each(function(i,n){
+		$("#IProjectType,#NNumber,#NDifficulty,#NRiskLevel,#Benable,#VRemarks").each(function(i,n){
 				$("#"+n.id).attr("disabled",inputflag);
 		});
 		var value = $('input:radio[name="IProjectType"]:checked').val();
 		$("#IProjectType"+value).focus();
 		if(xlbz.sta == 1){
-			$("#MNumber,#MDifficulty,#MRiskLevel").each(function(i,n){
+			$("#NNumber,#NDifficulty,#NRiskLevel").each(function(i,n){
 					$("#"+n.id).val("0.00");
 			});
 		}

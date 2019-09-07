@@ -1,7 +1,6 @@
 package utils;
 
 import java.io.ByteArrayOutputStream;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

@@ -54,13 +54,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div class="formDiv">
   				<div class="formLeft">科室编码：</div>
   				<div class="formRight">
-  					<input type="text" id="VNum" />
+  					<input type="text" id="VNum" disabled/>
   				</div>
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">科室名称：</div>
   				<div class="formRight">
-  					<input type="text" id="VName" />
+  					<input type="text" id="VName" disabled/>
   				</div>
   			</div>
   			<div class="formDiv">
@@ -82,15 +82,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">项目次数金额：</div>
-  				<div class="formRight"><input type="text" id="MNumber" /></div>
+  				<div class="formRight"><input type="text" id="NNumber" /></div>
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">项目难度金额：</div>
-  				<div class="formRight"><input type="text" id="MDifficulty" /></div>
+  				<div class="formRight"><input type="text" id="NDifficulty" /></div>
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">风险程度金额：</div>
-  				<div class="formRight"><input type="text" id="MRiskLevel" /></div>
+  				<div class="formRight"><input type="text" id="NRiskLevel" /></div>
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">是否可用：</div>
@@ -113,16 +113,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="BtnFoot">
   			<div class="BomToolbar">
   				<div class="Tbar">
-  					<input type="button" id="can" class="Btn" value="放弃" onclick="xlbz.BtnCan()" onmouseover="xlbz.BtnMove(1,this);" onmouseout="xlbz.BtnMove(2,this);"/>
+  					<input type="button" id="import" class="Btn" value="导入更新" onclick="xlbz.import()" onmouseover="xlbz.BtnMove(1,this);" onmouseout="xlbz.BtnMove(2,this);"/>
+  				</div>
+  				<!-- <div class="Tbar">
+  					<input type="button" id="add" class="Btn" value="新增" onclick="xlbz.BtnAdd()" onmouseover="xlbz.BtnMove(1,this);" onmouseout="xlbz.BtnMove(2,this);"/>
+  				</div> -->
+  				<div class="Tbar">
+  					<input type="button" id="mod" class="Btn" value="修改" onclick="xlbz.BtnMod()" onmouseover="xlbz.BtnMove(1,this);" onmouseout="xlbz.BtnMove(2,this);"/>
   				</div>
   				<div class="Tbar">
   					<input type="button" id="sav" class="Btn" value="保存" onclick="xlbz.BtnSav()" onmouseover="xlbz.BtnMove(1,this);" onmouseout="xlbz.BtnMove(2,this);"/>
   				</div>
   				<div class="Tbar">
-  					<input type="button" id="mod" class="Btn" value="修改" onclick="xlbz.BtnMod()" onmouseover="xlbz.BtnMove(1,this);" onmouseout="xlbz.BtnMove(2,this);"/>
-  				</div>
-  				<div class="Tbar">
-  					<input type="button" id="add" class="Btn" value="新增" onclick="xlbz.BtnAdd()" onmouseover="xlbz.BtnMove(1,this);" onmouseout="xlbz.BtnMove(2,this);"/>
+  					<input type="button" id="can" class="Btn" value="放弃" onclick="xlbz.BtnCan()" onmouseover="xlbz.BtnMove(1,this);" onmouseout="xlbz.BtnMove(2,this);"/>
   				</div>
   			</div>
   		</div>

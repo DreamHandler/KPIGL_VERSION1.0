@@ -13,6 +13,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 		InitCompriseCss("source/css/FormCss.css");
 		InitComprise(BassModuleUrl+"Grid/LyGrid.js");
+		InitComprise(BassModuleUrl+"EpBox/EpBox.js");
+		InitComprise(BassModuleUrl+"EpBox/MoreEpBox.js");
 		InitComprise("XTWH/javascript/FPXSWH.js");
 		InitCompriseCss("source/css/XTWH/FPXSWH.css");
 		var bwidth = $(this).width();
@@ -54,19 +56,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div class="formDiv">
   				<div class="formLeft">科室编码：</div>
   				<div class="formRight">
-  					<input type="text" id="VNum" />
+  					<input type="text" id="VNum" disabled/>
   				</div>
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">科室名称：</div>
   				<div class="formRight">
-  					<input type="text" id="VName" />
+  					<input type="text" id="VName"/>
   				</div>
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">归属科室名称：</div>
   				<div class="formRight">
-  					<input type="text" id="VManagement" />
+  					<input type="text" id="VManagementNum" style="display:none;"/>
+  					<input type="text" id="VManagement" onfocus="fpxs.getEpBox(this,'TBGSKS')"/>
   				</div>
   			</div>
   			<div class="formDiv">
@@ -92,16 +95,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="BtnFoot">
   			<div class="BomToolbar">
   				<div class="Tbar">
-  					<input type="button" id="can" class="Btn" value="放弃" onclick="fpxs.BtnCan()" onmouseover="fpxs.BtnMove(1,this);" onmouseout="fpxs.BtnMove(2,this);"/>
+  					<input type="button" id="import" class="Btn" value="导入更新" onclick="fpxs.import()" onmouseover="fpxs.BtnMove(1,this);" onmouseout="fpxs.BtnMove(2,this);"/>
+  				</div>
+  				<!-- <div class="Tbar">
+  					<input type="button" id="add" class="Btn" value="新增" onclick="fpxs.BtnAdd()" onmouseover="fpxs.BtnMove(1,this);" onmouseout="fpxs.BtnMove(2,this);"/>
+  				</div> -->
+  				<div class="Tbar">
+  					<input type="button" id="mod" class="Btn" value="修改" onclick="fpxs.BtnMod()" onmouseover="fpxs.BtnMove(1,this);" onmouseout="fpxs.BtnMove(2,this);"/>
   				</div>
   				<div class="Tbar">
   					<input type="button" id="sav" class="Btn" value="保存" onclick="fpxs.BtnSav()" onmouseover="fpxs.BtnMove(1,this);" onmouseout="fpxs.BtnMove(2,this);"/>
   				</div>
   				<div class="Tbar">
-  					<input type="button" id="mod" class="Btn" value="修改" onclick="fpxs.BtnMod()" onmouseover="fpxs.BtnMove(1,this);" onmouseout="fpxs.BtnMove(2,this);"/>
-  				</div>
-  				<div class="Tbar">
-  					<input type="button" id="add" class="Btn" value="新增" onclick="fpxs.BtnAdd()" onmouseover="fpxs.BtnMove(1,this);" onmouseout="fpxs.BtnMove(2,this);"/>
+  					<input type="button" id="can" class="Btn" value="放弃" onclick="fpxs.BtnCan()" onmouseover="fpxs.BtnMove(1,this);" onmouseout="fpxs.BtnMove(2,this);"/>
   				</div>
   			</div>
   		</div>

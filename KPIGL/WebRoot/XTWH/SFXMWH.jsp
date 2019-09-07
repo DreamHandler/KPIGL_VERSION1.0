@@ -13,6 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 		InitCompriseCss("source/css/FormCss.css");
 		InitComprise(BassModuleUrl+"Grid/LyGrid.js");
+		InitComprise(BassDirUrl+"LyFuntion.js");
 		InitComprise("XTWH/javascript/SFXMWH.js");
 		InitCompriseCss("source/css/XTWH/SFXMWH.css");
 		var bwidth = $(this).width();
@@ -68,6 +69,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				<div class="formLeft">项目种类：</div>
   				<div class="formRight" id="IProjectType">
   					<div class="bitradio">
+	  					<input id="IProjectType0" name="IProjectType" type="radio" value="0" checked="checked" />
+	  					<label for="IProjectType0" class="radio-label">不区分</label>
+  					</div>
+  					<div class="bitradio">
 	  					<input id="IProjectType1" name="IProjectType" type="radio" value="1" checked="checked" />
 	  					<label for="IProjectType1" class="radio-label">非手术类</label>
   					</div>
@@ -94,12 +99,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				<div class="formLeft">项目名称：</div>
   				<div class="formRight">
   					<input type="text" id="VNum" style="display:none;"/>
-  					<input type="text" id="VName" />
+  					<input type="text" id="VName" disabled/>
   				</div>
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">门诊医生点数：</div>
-  				<div class="formRight"><input type="text" id="NOutDoc" /></div>
+  				<div class="formRight"><input type="text" id="NOutDoc" ToFix="0.00"/></div>
   			</div>
   			<div class="formDiv">
   				<div class="formLeft">临床医生点数：</div>
@@ -137,16 +142,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		<div class="BtnFoot">
   			<div class="BomToolbar">
   				<div class="Tbar">
-  					<input type="button" id="can" class="Btn" value="放弃" onclick="sfxm.BtnCan()" onmouseover="sfxm.BtnMove(1,this);" onmouseout="sfxm.BtnMove(2,this);"/>
+  					<input type="button" id="import" class="Btn" value="导入更新" onclick="sfxm.import()" onmouseover="sfxm.BtnMove(1,this);" onmouseout="sfxm.BtnMove(2,this);"/>
+  				</div>
+  				<!-- <div class="Tbar">
+  					<input type="button" id="add" class="Btn" value="新增" onclick="sfxm.BtnAdd()" onmouseover="sfxm.BtnMove(1,this);" onmouseout="sfxm.BtnMove(2,this);"/>
+  				</div> -->
+  				<div class="Tbar">
+  					<input type="button" id="mod" class="Btn" value="修改" onclick="sfxm.BtnMod()" onmouseover="sfxm.BtnMove(1,this);" onmouseout="sfxm.BtnMove(2,this);"/>
   				</div>
   				<div class="Tbar">
   					<input type="button" id="sav" class="Btn" value="保存" onclick="sfxm.BtnSav()" onmouseover="sfxm.BtnMove(1,this);" onmouseout="sfxm.BtnMove(2,this);"/>
   				</div>
   				<div class="Tbar">
-  					<input type="button" id="mod" class="Btn" value="修改" onclick="sfxm.BtnMod()" onmouseover="sfxm.BtnMove(1,this);" onmouseout="sfxm.BtnMove(2,this);"/>
-  				</div>
-  				<div class="Tbar">
-  					<input type="button" id="add" class="Btn" value="新增" onclick="sfxm.BtnAdd()" onmouseover="sfxm.BtnMove(1,this);" onmouseout="sfxm.BtnMove(2,this);"/>
+  					<input type="button" id="can" class="Btn" value="放弃" onclick="sfxm.BtnCan()" onmouseover="sfxm.BtnMove(1,this);" onmouseout="sfxm.BtnMove(2,this);"/>
   				</div>
   			</div>
   		</div>

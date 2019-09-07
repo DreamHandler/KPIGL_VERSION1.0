@@ -96,16 +96,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div class="BtnFoot">
 	  			<div class="BomToolbar">
 	  				<div class="Tbar">
-	  					<input type="button" id="add" class="Btn" value="新增" onclick="dxlxwh.BtnAdd()" onmouseover="dxlxwh.BtnMove(1,this);" onmouseout="dxlxwh.BtnMove(2,this);"/>
-	  				</div>
-	  				<div class="Tbar">
-	  					<input type="button" id="mod" class="Btn" value="修改" onclick="dxlxwh.BtnMod()" onmouseover="dxlxwh.BtnMove(1,this);" onmouseout="dxlxwh.BtnMove(2,this);"/>
+	  					<input type="button" id="can" class="Btn" value="放弃" onclick="dxlxwh.BtnCan()" onmouseover="dxlxwh.BtnMove(1,this);" onmouseout="dxlxwh.BtnMove(2,this);"/>
 	  				</div>
 	  				<div class="Tbar">
 	  					<input type="button" id="sav" class="Btn" value="保存" onclick="dxlxwh.BtnSav()" onmouseover="dxlxwh.BtnMove(1,this);" onmouseout="dxlxwh.BtnMove(2,this);"/>
 	  				</div>
 	  				<div class="Tbar">
-	  					<input type="button" id="can" class="Btn" value="放弃" onclick="dxlxwh.BtnCan()" onmouseover="dxlxwh.BtnMove(1,this);" onmouseout="dxlxwh.BtnMove(2,this);"/>
+	  					<input type="button" id="mod" class="Btn" value="修改" onclick="dxlxwh.BtnMod()" onmouseover="dxlxwh.BtnMove(1,this);" onmouseout="dxlxwh.BtnMove(2,this);"/>
+	  				</div>
+	  				<div class="Tbar">
+	  					<input type="button" id="add" class="Btn" value="新增" onclick="dxlxwh.BtnAdd()" onmouseover="dxlxwh.BtnMove(1,this);" onmouseout="dxlxwh.BtnMove(2,this);"/>
 	  				</div>
 	  			</div>
 	  		</div>

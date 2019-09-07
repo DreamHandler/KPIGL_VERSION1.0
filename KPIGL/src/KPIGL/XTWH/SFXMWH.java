@@ -6,6 +6,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 
 import SOA.Util.Model.XtParam;
+import SOA.Util.Model.xtcsDefList;
 
 import com.model.Aperator;
 import com.util.BaseServire;
@@ -37,6 +38,29 @@ public class SFXMWH extends Busy{
 		return doc.asXML();
 	}
 	/**
+	 * 导入更新数据
+	 * @param inEle
+	 * @param inopr
+	 * @return
+	 * @throws Exception 
+	 */
+	public String DataImport(Document inEle, Aperator inopr) throws Exception{
+		Document doc = null;
+		
+		String dataLY = xtcsDefList.GetSysXtcs("000002", ""); //收费项目视图
+		//保存已分配信息
+		String SQL=" MERGE LYJXKH..TBSFXM  AS MBTABLE USING ("+dataLY+") AS YBTABLE (VNum,VName,VPYM)"
+				+ " ON (MBTABLE.VNum = YBTABLE.VNum) WHEN MATCHED THEN "
+				+ " UPDATE SET MBTABLE.VName=YBTABLE.VName,MBTABLE.VPYM=YBTABLE.VPYM "
+				+ " WHEN NOT MATCHED THEN INSERT (VNum,VName,VPYM) VALUES (VNum,VName,VPYM);";
+		try {
+			doc = this.ServireSQL(BaseServire.SysModify,SQL,null,inopr);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return doc.asXML();
+	}
+	/**
 	 * 新增、修改数据
 	 * @param inEle
 	 * @param inopr
@@ -45,7 +69,7 @@ public class SFXMWH extends Busy{
 	public String DataSave(Document inEle, Aperator inopr){
 		Element Aele = inEle.getRootElement().element("ASK");
 		String flag = Aele.attributeValue("flag");
-		String VName = Aele.attributeValue("VName");
+//		String VName = Aele.attributeValue("VName");
 		String IItemType = Aele.attributeValue("IItemType");
 		String IProjectType = Aele.attributeValue("IProjectType");
 		String Benable = Aele.attributeValue("Benable");
@@ -59,20 +83,20 @@ public class SFXMWH extends Busy{
 		String NExcimerNurse = Aele.attributeValue("NExcimerNurse");
 		String NBeautyCentre = Aele.attributeValue("NBeautyCentre");
 		ArrayList<String> list = new ArrayList<String>();
-		list.add(VName);
-		list.add(VName);
+//		list.add(VName);
+//		list.add(VName);
 		list.add(IItemType);
 		list.add(IProjectType);
 		list.add(Benable);
-		list.add(NOutDoc);
-		list.add(NClinician);
-		list.add(NAnesthetist);
-		list.add(NInspection);
-		list.add(NWardNurses);
-		list.add(NWardRoomNurse);
-		list.add(NOutRoomNurse);
-		list.add(NExcimerNurse);
-		list.add(NBeautyCentre);
+		list.add("".equals(NOutDoc)?"0.00":NOutDoc);
+		list.add("".equals(NClinician)?"0.00":NClinician);
+		list.add("".equals(NAnesthetist)?"0.00":NAnesthetist);
+		list.add("".equals(NInspection)?"0.00":NInspection);
+		list.add("".equals(NWardNurses)?"0.00":NWardNurses);
+		list.add("".equals(NWardRoomNurse)?"0.00":NWardRoomNurse);
+		list.add("".equals(NOutRoomNurse)?"0.00":NOutRoomNurse);
+		list.add("".equals(NExcimerNurse)?"0.00":NExcimerNurse);
+		list.add("".equals(NBeautyCentre)?"0.00":NBeautyCentre);
 		
 		Document doc = null;
 		String SQL="";
@@ -86,7 +110,7 @@ public class SFXMWH extends Busy{
 			}else if("2".equals(flag)){
 				String VNum = Aele.attributeValue("VNum");
 				list.add(VNum);
-				SQL = "UPDATE LYJXKH..TBSFXM SET VName=?,VPYM=BASEMENT.DBO.GetPY(?),IItemType=?,IProjectType=?"
+				SQL = "UPDATE LYJXKH..TBSFXM SET IItemType=?,IProjectType=?"
 						+ ",Benable=?,NOutDoc=?,NClinician=?,NAnesthetist=?,NInspection=?,NWardNurses=?"
 						+ ",NWardRoomNurse=?,NOutRoomNurse=?,NExcimerNurse=?,NBeautyCentre=? WHERE VNum=?";
 			}

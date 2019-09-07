@@ -1,5 +1,5 @@
-var SFXMWH = Class.create();
-SFXMWH.prototype = Object.extend(new LBase(), {
+var SSXSWH = Class.create();
+SSXSWH.prototype = Object.extend(new LBase(), {
 	grid : null,
 	sta : 0, //0-取消；1-新增；2-修改
 	selectRowIndex : 0,
@@ -7,16 +7,16 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 	status : "", 
 	dataCount : 0,
 	initLoad : function(){
-		sfxm.initCss();
-		sfxm.inputDis(true);
-		sfxm.createGrid();
-		sfxm.LoadData();
+		ssxs.initCss();
+		ssxs.inputDis(true);
+		ssxs.createGrid();
+		ssxs.LoadData();
 	},
 	initCss : function(){
 		$(".con").width(bwidth);
 		$(".con").height(bheight);
 		
-		$(".SetCenter").height(200);
+		$(".SetCenter").height(130);
 		
 		$(".TopGrid").width($(".con").width());
 		$(".TopGrid").height($(".con").height()-$(".SetCenter").height()-50);
@@ -27,36 +27,26 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 		$(".BtnFoot").width($(".con").width());
 		$(".BtnFoot").height(50);
 		
-		sfxm.BtnChange(3);
+		ssxs.BtnChange(3);
 		//初始化 只能输入数字
 //		Funs.OnInputReg("NOutDoc");
 		
 	},
 	createGrid : function(){
-		sfxm.grid = $("#GridDiv").LyGrid({ 
+		ssxs.grid = $("#GridDiv").LyGrid({ 
             columns: [
-            { display: '项目编码', name: 'VNum', width: 80, type: 'int' },
-            { display: '项目名称', name: 'VName', width: 160 },
-            { display: '拼音码', name: 'VPYM', width: 60 },
-            { display: '项目类型', name: 'IItemType', width: 80 ,render : sfxm.toItemType},
-            { display: '项目种类', name: 'IProjectType', width: 80 ,render : sfxm.toProjectType},
-            { display: '可用性', name: 'Benable', width: 60 ,render : sfxm.toBenable},
-            { display: '门诊医生点数', name: 'NOutDoc', width: 110 },
-            { display: '临床医生点数', name: 'NClinician', width: 110 },
-            { display: '麻醉师点数', name: 'NAnesthetist', width: 90 },
-            { display: '检验科室点数', name: 'NInspection', width: 120 },
-            { display: '病区护士点数', name: 'NWardNurses', width: 120 },
-            { display: '病区手术室护士点数', name: 'NWardRoomNurse', width: 160 },
-            { display: '门诊手术室护士点数', name: 'NOutRoomNurse', width: 160 },
-            { display: '准分子护士点数', name: 'NExcimerNurse', width: 120 },
-            { display: '美容中心护士点数', name: 'NBeautyCentre', width: 140 }
+            { display: '手术编码', name: 'VNum', width: 80, type: 'int' },
+            { display: '手术名称', name: 'VName', width: 160 },
+            { display: '拼音码', name: 'VPYM', width: 160 },
+            { display: '分配系数', name: 'NDistribution', width: 110 },
+            { display: '可用性', name: 'Benable', width: 60 ,render : ssxs.toBenable}
             ], width: $(".GridDiv").width(), pkName: 'VNum',
             pageSize:10,
             pageSizeOptions: [10, 15, 20, 25], 
             height: $(".GridDiv").height()-1,
             //grid 点击事件
-            onSelectRow : sfxm.grid_onSelectRow,
-            onBeforeSelectRow : sfxm.grid_disabled
+            onSelectRow : ssxs.grid_onSelectRow,
+            onBeforeSelectRow : ssxs.grid_disabled
         });
 	},
 	/**
@@ -75,31 +65,29 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 	 * 收费项目行选中
 	 */
 	grid_onSelectRow : function(rowData,status){
-		sfxm.status = status;
-		sfxm.rowData = rowData;
-		sfxm.selectRowIndex = rowData["__index"];
-		$("#VNum,#VName,#IItemType,#IProjectType,#Benable,#NOutDoc,#NClinician" +
-			",#NAnesthetist,#NInspection,#NWardNurses,#NWardRoomNurse,#NOutRoomNurse" +
-			",#NExcimerNurse,#NBeautyCentre").each(function(i,n){
-				if(n.id == "IItemType" || n.id == "IProjectType" || n.id=="Benable"){
+		ssxs.status = status;
+		ssxs.rowData = rowData;
+		ssxs.selectRowIndex = rowData["__index"];
+		$("#VNum,#VName,#VCODE10,#Benable,#NDistribution,#VRemarks").each(function(i,n){
+				if(n.id=="Benable"){
 					$("#"+n.id+rowData[n.id])[0].checked = true;
 				}else{
 					$("#"+n.id).val(rowData[n.id]);
 				}
 		});
-		sfxm.BtnChange(1);
+		ssxs.BtnChange(1);
 	},
 	/**
 	 * 禁止对grid进行操作
 	 */
 	grid_disabled : function(rowid,e){
-		if(sfxm.sta == 1){
-			alert("请先保存或者取消对收费项目的操作！")
-			$("#VName").focus();
+		if(ssxs.sta == 1){
+			alert("请先保存或者取消对手术系数的操作！")
+			$("#NDistribution").focus();
 			return false;
-		}else if(sfxm.sta == 2){
-			alert("请先保存或者取消对收费项目的操作！")
-			$("#VName").select();
+		}else if(ssxs.sta == 2){
+			alert("请先保存或者取消对手术系数的操作！")
+			$("#NDistribution").select();
 			return false;
 		}else{
 			return true;
@@ -116,21 +104,21 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 		if($("#bitqry").get(0).checked==true){
 			QryJson["BENABLE"] = $("input[name='FilBit']:checked").val();
 		}
-		this.ajaxCall(QryJson,"KPIGL.XTWH.SFXMWH","DataQry",sfxm.DataHander,false);
+		this.ajaxCall(QryJson,"KPIGL.XTWH.SSXSWH","DataQry",ssxs.DataHander,false);
 	},
 	DataHander : function(ajax){
 		if (xmlObject.readyState == 4 && xmlObject.status == 200) {
 			var response = xmlObject;
 			var node = response.responseXML.documentElement;
 			if(node==null||node.xml===undefined){
-				node = sfxm.StrToXml(response.responseText);
+				node = ssxs.StrToXml(response.responseText);
 			}
-			sfxm.SetGridData(node);
-			if(sfxm.dataCount != 0){
-				if(sfxm.dataCount < sfxm.selectRowIndex+1){
-					sfxm.selectRowIndex = 0;
+			ssxs.SetGridData(node);
+			if(ssxs.dataCount != 0){
+				if(ssxs.dataCount < ssxs.selectRowIndex+1){
+					ssxs.selectRowIndex = 0;
 				}
-				sfxm.grid.select(sfxm.selectRowIndex);
+				ssxs.grid.select(ssxs.selectRowIndex);
 			}
 		}
 	},
@@ -138,8 +126,8 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 		var jsonObj = {};
 		var Djson = GridXmlToJson.Change(node);
         jsonObj.Rows = Djson;
-        sfxm.dataCount = Djson.length;
-        sfxm.grid.set({ data: jsonObj }); 
+        ssxs.dataCount = Djson.length;
+        ssxs.grid.set({ data: jsonObj }); 
 	},
 	/**
 	 * 复选框控制
@@ -170,7 +158,7 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 	import : function(){
 		$.LyDialog.confirm('导入后数据会全部更新，是否确定导入？', function (bool){
 			if(bool){
-				sfxm.ajaxCall({},"KPIGL.XTWH.SFXMWH","DataImport",sfxm.importHander,false);
+				ssxs.ajaxCall({},"KPIGL.XTWH.SSXSWH","DataImport",ssxs.importHander,false);
 			}
 		});
 	},
@@ -179,62 +167,60 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 			var response = xmlObject;
 			var node = response.responseXML.documentElement;
 			if(node==null||node.xml===undefined){
-				node = sfxm.StrToXml(response.responseText);
+				node = ssxs.StrToXml(response.responseText);
 			}
 			if(node.selectSingleNode("RES/DAT").text>="1"){
 				alert("导入更新成功！");
-				sfxm.LoadData();
+				ssxs.LoadData();
 			}else{
 				alert("导入更新失败！");
 			}
 		}
 	},
 	BtnAdd : function(){
-		sfxm.sta = 1;
-		sfxm.BtnChange(2);
-		sfxm.inputDis(false);
+		ssxs.sta = 1;
+		ssxs.BtnChange(2);
+		ssxs.inputDis(false);
 	},
 	BtnMod : function(){
-		sfxm.sta = 2;
-		sfxm.BtnChange(2);
-		sfxm.inputDis(false);
+		ssxs.sta = 2;
+		ssxs.BtnChange(2);
+		ssxs.inputDis(false);
 	},
 	BtnSav : function(){
-		var QryJson = {"flag":sfxm.sta};
-		$("#VNum,#VName,#IItemType,#IProjectType,#Benable,#NOutDoc,#NClinician" +
-			",#NAnesthetist,#NInspection,#NWardNurses,#NWardRoomNurse,#NOutRoomNurse" +
-			",#NExcimerNurse,#NBeautyCentre").each(function(i,n){
-				if(n.id == "IItemType" || n.id == "IProjectType" || n.id=="Benable"){
+		var QryJson = {"flag":ssxs.sta};
+		$("#VNum,#VName,#VCODE10,#Benable,#NDistribution,#VRemarks").each(function(i,n){
+				if(n.id=="Benable"){
 					var value = $('input:radio[name="'+n.id+'"]:checked').val();
 					QryJson[n.id] = value;
 				}else{
 					QryJson[n.id] = $("#"+n.id).val();
 				}
 		});
-		this.ajaxCall(QryJson,"KPIGL.XTWH.SFXMWH","DataSave",sfxm.BtnSavHandle,false);
+		this.ajaxCall(QryJson,"KPIGL.XTWH.SSXSWH","DataSave",ssxs.BtnSavHandle,false);
 	},
 	BtnSavHandle : function(ajax){
 		if (xmlObject.readyState == 4 && xmlObject.status == 200) {
 			var response = xmlObject;
 			var node = response.responseXML.documentElement;
 			if(node==null||node.xml===undefined){
-				node = sfxm.StrToXml(response.responseText);
+				node = ssxs.StrToXml(response.responseText);
 			}
 			if(node.selectSingleNode("RES/DAT").text=="1"){
 				alert("保存成功！");
-				sfxm.BtnCan();
-				sfxm.LoadData();
+				ssxs.BtnCan();
+				ssxs.LoadData();
 			}else{
 				alert("保存失败！");
 			}
 		}
 	},
 	BtnCan : function(){
-		sfxm.sta = 0;
-		sfxm.BtnChange(3);
-		sfxm.inputDis(true);
-		if(sfxm.dataCount != 0 && sfxm.dataCount >= sfxm.selectRowIndex){
-			sfxm.grid_onSelectRow(sfxm.rowData,sfxm.status);
+		ssxs.sta = 0;
+		ssxs.BtnChange(3);
+		ssxs.inputDis(true);
+		if(ssxs.dataCount != 0 && ssxs.dataCount >= ssxs.selectRowIndex){
+			ssxs.grid_onSelectRow(ssxs.rowData,ssxs.status);
 		}
 		
 	},
@@ -244,24 +230,24 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 	BtnChange : function(type){
 		if(type == 1){//导入更新、新增、修改可用，保存、放弃不可用
 			$("#import,#add,#mod").each(function(i,n){
-				sfxm.BtnDisabled(false,n.id);
+				ssxs.BtnDisabled(false,n.id);
 		    });
 			$("#sav,#can").each(function(i,n){
-				sfxm.BtnDisabled(true,n.id);
+				ssxs.BtnDisabled(true,n.id);
 		    });
 		}else if(type == 2){//保存、放弃可用,导入更新、新增、修改不可用
 			$("#sav,#can").each(function(i,n){
-				sfxm.BtnDisabled(false,n.id);
+				ssxs.BtnDisabled(false,n.id);
 		    });
 			$("#import,#add,#mod").each(function(i,n){
-				sfxm.BtnDisabled(true,n.id);
+				ssxs.BtnDisabled(true,n.id);
 		    });
 		}else if(type == 3){//导入更新、新增可用，修改、保存、放弃不可用
 			$("#import,#add").each(function(i,n){
-				sfxm.BtnDisabled(false,n.id);
+				ssxs.BtnDisabled(false,n.id);
 		    });
 			$("#mod,#sav,#can").each(function(i,n){
-				sfxm.BtnDisabled(true,n.id);
+				ssxs.BtnDisabled(true,n.id);
 		    });
 		}
 	},
@@ -284,17 +270,13 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 	 * 输入框显隐控制
 	 */
 	inputDis : function(inputflag){
-		sfxm.conditionDis();
-		$("#IItemType,#IProjectType,#Benable,#NOutDoc,#NClinician" +
-			",#NAnesthetist,#NInspection,#NWardNurses,#NWardRoomNurse,#NOutRoomNurse" +
-			",#NExcimerNurse,#NBeautyCentre").each(function(i,n){
+		ssxs.conditionDis();
+		$("#Benable,#NDistribution,#VRemarks").each(function(i,n){
 				$("#"+n.id).attr("disabled",inputflag);
 		});
-		var value = $('input:radio[name="IItemType"]:checked').val();
-		$("#IItemType"+value).focus();
-		if(sfxm.sta == 1){
-			$("#NOutDoc,#NClinician,#NAnesthetist,#NInspection,#NWardNurses,#NWardRoomNurse" +
-					",#NOutRoomNurse,#NExcimerNurse,#NBeautyCentre").each(function(i,n){
+		$("#NDistribution").focus();
+		if(ssxs.sta == 1){
+			$("#NDistribution").each(function(i,n){
 					$("#"+n.id).val("0.00");
 			});
 		}
@@ -303,7 +285,7 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 	 * 查询条件显隐控制
 	 */
 	conditionDis : function(){
-		if(sfxm.sta == 0){
+		if(ssxs.sta == 0){
 			$("#valueqry,#bitqry,#Qry").each(function(i,n){
 				$("#"+n.id)[0].disabled = false;
 				if(n.id == "valueqry"){
@@ -312,13 +294,13 @@ SFXMWH.prototype = Object.extend(new LBase(), {
 					$("#FilBit")[0].disabled = !$("#"+n.id)[0].checked;
 				}
 			});
-			sfxm.BtnDisabled(false,"Qry");
+			ssxs.BtnDisabled(false,"Qry");
 		}else{
 			$("#valueqry,#FilValue,#bitqry,#FilBit").each(function(i,n){
 				$("#"+n.id)[0].disabled = true;
 			});
-			sfxm.BtnDisabled(true,"Qry");
+			ssxs.BtnDisabled(true,"Qry");
 		}
 	}
 });
-var sfxm = new SFXMWH();
+var ssxs = new SSXSWH();
