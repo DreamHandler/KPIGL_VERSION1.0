@@ -31,15 +31,24 @@ public class PJDXLXWH extends Busy{
 			Element FieldValue = doc.getRootElement().element("FieldsValue").element("FieldValue");
 			String VNumStr = FieldValue.attributeValue("VNum");
 			int maxVNum = Integer.parseInt(VNumStr.substring(VNumStr.lastIndexOf("|")+1,VNumStr.length()));
-			int nowVNum = 1;
+			String SnowVNum = "00001";
 			for(int i=1;i<=maxVNum;i++){
-				nowVNum = i;
+				SnowVNum = ""+i;
+				int len = SnowVNum.length();
+				for(int k=0;k<(5-len);k++){
+					SnowVNum = "0"+SnowVNum;
+				}
 				if(!(VNumStr.indexOf(i+"|")>-1)){
 					break;
 				}
 			}
-			nowVNum = nowVNum==maxVNum?maxVNum+1:nowVNum;
-			FieldValue.addAttribute("maxVNum", nowVNum<10?"0"+nowVNum:""+nowVNum);
+			int nowVNum = (Integer.parseInt(SnowVNum)==maxVNum?maxVNum+1:Integer.parseInt(SnowVNum));
+			String SmaxVNum = ""+nowVNum;
+			int len = SmaxVNum.length();
+			for(int j=0;j<(5-len);j++){
+				SmaxVNum = "0"+SmaxVNum;
+			}
+			FieldValue.addAttribute("maxVNum", SmaxVNum);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
