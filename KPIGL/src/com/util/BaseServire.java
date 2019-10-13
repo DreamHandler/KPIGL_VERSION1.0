@@ -27,7 +27,7 @@ public class BaseServire {
 	}*/
 
 	public Document ServireSQL(String type,String SQL ,ArrayList<String> list,Aperator opr) throws Exception{
-		 Document document = null;
+		Document document = null;
 		document = DocumentHelper.createDocument();
 		Element xml = document.addElement("xml");
 		Element czyjd = xml.addElement("CZY");

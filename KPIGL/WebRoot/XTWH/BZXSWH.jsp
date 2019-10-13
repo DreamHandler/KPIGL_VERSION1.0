@@ -13,6 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 		InitCompriseCss("source/css/FormCss.css");
 		InitComprise(BassModuleUrl+"Grid/LyGrid.js");
+		InitComprise(BassModuleUrl+"Grid/LyDialog.js");
 		InitComprise(BassDirUrl+"LyFuntion.js");
 		InitComprise("XTWH/javascript/BZXSWH.js");
 		InitCompriseCss("source/css/XTWH/BZXSWH.css");
@@ -27,12 +28,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			<div class="fillter">
   				<div class="checkdiv">
   					<input id="valueqry" name="valueqry" type="checkbox" onclick="bzxs.FilCheClick(this,1,'FilValue');"/>
-  					<label for="valueqry" class="checkbox-label">模糊查询&nbsp;</label>
+  					<label for="valueqry" class="checkbox-label">分组查询&nbsp;</label>
   				</div>
   				<div class="textdiv"><input type="text" id="FilValue" /></div>
   				<div class="checkdiv">
   					<input id="bitqry" name="bitqry" type="checkbox" onclick="bzxs.FilCheClick(this,2,'FilBit');"/>
-  					<label for="bitqry" class="checkbox-label">是否可用</label>
+  					<label for="bitqry" class="checkbox-label">分组是否可用</label>
   				</div>
   				<div id="FilBit">
   					<div class="filradio">
@@ -51,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			</div>
   			<div class="GridDiv" id="GridDiv"></div>
   		</div>
-  		<div class="SetCenter">
+  		<div class="SetCenter" id="bz_info" style="display:none;">
   			<div class="formDiv">
   				<div class="formLeft">病种编码：</div>
   				<div class="formRight">
@@ -86,14 +87,61 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				<div class="formRight"><textarea id="VRemarks" ></textarea></div>
   			</div>
   		</div>
+  		<div class="SetCenter" id="fz_info">
+  			<div class="formDiv" >
+  				<div class="formLeft">分组编码：</div>
+  				<div class="formRight">
+  					<input type="text" id="VNum_fz" disabled/>
+  				</div>
+  			</div>
+  			<div class="formDiv">
+  				<div class="formLeft">分组名称：</div>
+  				<div class="formRight">
+  					<input type="text" id="VName_fz" disabled/>
+  				</div>
+  			</div>
+  			<div class="formDiv">
+  				<div class="formLeft">通用系数：</div>
+  				<div class="formRight"><input type="text" id="NGeneral_fz"/></div>
+  			</div>
+  			<div class="formDiv">
+  				<div class="formLeft">是否可用：</div>
+  				<div class="formRight" id="Benable_fz">
+  					<div class="bitradio">
+	  					<input id="Benable_fz1" name="Benable_fz" type="radio" value="1" checked="checked" />
+	  					<label for="Benable_fz1" class="radio-label">是</label>
+  					</div>
+  					<div class="bitradio">
+	  					<input id="Benable_fz0" name="Benable_fz" type="radio" value="0" />
+	  					<label for="Benable_fz0" class="radio-label">否</label>
+  					</div>
+  				</div>
+  			</div>
+  			<div class="formDiv">
+  				<div class="formLeft">是否使用通用系数：</div>
+  				<div class="formRight" id="BUseGeneral_fz">
+  					<div class="bitradio">
+	  					<input id="BUseGeneral_fz1" name="BUseGeneral_fz" type="radio" value="1" checked="checked" />
+	  					<label for="BUseGeneral_fz1" class="radio-label">是</label>
+  					</div>
+  					<div class="bitradio">
+	  					<input id="BUseGeneral_fz0" name="BUseGeneral_fz" type="radio" value="0" />
+	  					<label for="BUseGeneral_fz0" class="radio-label">否</label>
+  					</div>
+  				</div>
+  			</div>
+  		</div>
   		<div class="BtnFoot">
   			<div class="BomToolbar">
-  				<div class="Tbar">
-  					<input type="button" id="import" class="Btn" value="导入更新" onclick="bzxs.import()" onmouseover="bzxs.BtnMove(1,this);" onmouseout="bzxs.BtnMove(2,this);"/>
-  				</div>
   				<!-- <div class="Tbar">
-  					<input type="button" id="add" class="Btn" value="新增" onclick="bzxs.BtnAdd()" onmouseover="bzxs.BtnMove(1,this);" onmouseout="bzxs.BtnMove(2,this);"/>
+  					<input type="button" id="import" class="Btn" value="导入病种" onclick="bzxs.import()" onmouseover="bzxs.BtnMove(1,this);" onmouseout="bzxs.BtnMove(2,this);"/>
   				</div> -->
+  				<div class="Tbar">
+  					<input type="button" id="add" class="Btn" value="新增分组" onclick="bzxs.BtnAdd()" onmouseover="bzxs.BtnMove(1,this);" onmouseout="bzxs.BtnMove(2,this);"/>
+  				</div>
+  				<div class="Tbar">
+  					<input type="button" id="addBZ" class="Btn" value="添加病种" onclick="bzxs.addBZ()" onmouseover="bzxs.BtnMove(1,this);" onmouseout="bzxs.BtnMove(2,this);"/>
+  				</div>
   				<div class="Tbar">
   					<input type="button" id="mod" class="Btn" value="修改" onclick="bzxs.BtnMod()" onmouseover="bzxs.BtnMove(1,this);" onmouseout="bzxs.BtnMove(2,this);"/>
   				</div>
